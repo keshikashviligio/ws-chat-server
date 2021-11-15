@@ -1,0 +1,143 @@
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input, .form-group select {
+    padding: 8px 15px;
+}
+
+.form-group span {
+    display: block;
+}
+
+.form-group .form-error-message {
+    margin: 0;
+    color: red;
+}
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 20px;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 20px;
+        opacity: 1
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    top: 20px;
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 580px;
+    max-width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: end;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal .close {
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal .close:hover,
+.modal .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#user-list-container {
+    padding: 20px;
+}
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.enter-messenger {
+    display: block;
+    width: 200px;
+    margin: 100px auto;
+}
+.enter-messenger.entered {
+    display: none;
+}
+.messenger-wrapper {
+    display: none;
+}
+.messenger-wrapper.entered {
+    display: flex;
+    justify-content: start;
+    height: 100vh;
+    width: 1024px;
+    margin: 0 auto;
+    border: 1px solid #e3e3e3;
+    box-sizing: border-box;
+}
+.messenger-wrapper .online-users-container {
+    width: 250px;
+    border-right: 1px solid #e3e3e3;
+}
+
+.messenger-wrapper .messenger-body {
+    width: 100%;
+    padding: 15px;
+}
+.messenger-wrapper .messenger-messages {
+    height: calc(100% - 50px);
+}
+.messenger-wrapper .messenger-from-container, .messenger-wrapper #message-form {
+    width: 100%;
+    display: flex;
+}
+.messenger-wrapper .messenger-from-container input {
+    width: 100%;
+    height: 40px;
+}
