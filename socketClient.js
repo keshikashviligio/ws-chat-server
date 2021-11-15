@@ -21,7 +21,7 @@ enterMessengerBtn.addEventListener('click', e => {
 });
 
 function initMessenger(newUserName){
-  const socket = new WebSocket('ws://localhost:8080');
+  const socket = new WebSocket('ws://139.59.145.232:8080');
   // let tId = null;
   socket.addEventListener('open', e => {
     const newUser = { type: 'newUser', data: newUserName };
@@ -62,9 +62,9 @@ function initMessenger(newUserName){
     const messageDiv = document.createElement('div');
     messageDiv.innerText = message.data;
     messageDiv.setAttribute('data-id', message.id);
-    messageDiv.addEventListener('click', e => {
-      socket.send(JSON.stringify({ type: 'messageLike', id: message.id }));
-    });
+    // messageDiv.addEventListener('click', e => {
+    //   socket.send(JSON.stringify({ type: 'messageLike', id: message.id }));
+    // });
     messageDiv.appendChild(messageLikes);
     messagesContainer.appendChild(messageDiv);
   }
