@@ -73,7 +73,7 @@ function sendMessageWithSmile(messageObject, socket) {
       normalMessage.data = normalMessage.data.replace(/<3/g, '😍');
       normalMessage.data = normalMessage.data.replace(/:\|/g, '😐');
       normalMessage.data = normalMessage.data.replace(/:omg/g, '🤦');
-      normalMessage.data = `${client === socket && socket.id === sender.id ? 'You' : sender.data}: ${messageObject.data}`;
+      normalMessage.data = `${client === socket && socket.id === sender.id ? 'You' : sender.data}: ${normalMessage.data}`;
       // console.log(sender);
       client.send(JSON.stringify(normalMessage));
     }
