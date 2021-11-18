@@ -67,13 +67,15 @@ function sendMessageWithSmile(messageObject, socket) {
   const sender = activeUsers.find(user => user.id === socket.id);
   server.clients.forEach(function each(client) {
     if (client.readyState === ws.OPEN) {
-      messageObject.data = messageObject.data.replace(/:D/gi, '😀');
-      messageObject.data = messageObject.data.replace(/;\)/g, '😉');
-      messageObject.data = messageObject.data.replace(/<3/g, '😍');
-      messageObject.data = messageObject.data.replace(/:\|/g, '😐');
-      messageObject.data = messageObject.data.replace(/:omg/g, '🤦');
-      messageObject.data = `${client === socket ? 'You' : sender.data}: ${messageObject.data}`
-      client.send(JSON.stringify(messageObject));
+      const normalMessage = {...messageObject};
+      normalMessage.data = normalMessage.data.replace(/:D/gi, '😀');
+      normalMessage.data = normalMessage.data.replace(/;\)/g, '😉');
+      normalMessage.data = normalMessage.data.replace(/<3/g, '😍');
+      normalMessage.data = normalMessage.data.replace(/:\|/g, '😐');
+      normalMessage.data = normalMessage.data.replace(/:omg/g, '🤦');
+      normalMessage.data = `${client === socket && socket.id === sender.id ? 'You' : sender.data}: ${messageObject.data}`;
+      // console.log(sender);
+      client.send(JSON.stringify(normalMessage));
     }
   });
 }
