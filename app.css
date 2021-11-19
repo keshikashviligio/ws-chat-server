@@ -141,3 +141,6 @@ body {
     width: 100%;
     height: 40px;
 }
+#canvas {
+    border: 1px solid #e3e3e3;
+}

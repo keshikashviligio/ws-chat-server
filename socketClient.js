@@ -21,8 +21,8 @@ enterMessengerBtn.addEventListener('click', e => {
 });
 
 function initMessenger(newUserName){
-  const socket = new WebSocket('ws://139.59.145.232:8080');
-  // let tId = null;
+  const socket = new WebSocket('ws://localhost:8080');
+  let tId = null;
   socket.addEventListener('open', e => {
     const newUser = { type: 'newUser', data: newUserName };
     socket.send(JSON.stringify(newUser));
@@ -38,6 +38,21 @@ function initMessenger(newUserName){
     if(message.type === 'activeUsers'){
       appendActiveUsers(message.data);
     }
+    if(message.type === 'userTyping'){
+      userTypingIndicator.innerText = `${message.data} is Typing`;
+      if(tId){
+        clearTimeout(tId);
+      }
+      tId = setTimeout(() => {
+        userTypingIndicator.innerText = '';
+      }, 1000);
+    }
+    if(message.type === 'messageLike'){
+      const currentMessage = document.querySelector(`[data-id="${message.id}"]`);
+      if(currentMessage){
+        currentMessage.querySelector('span').innerText = `Likes: ${message.likeCount}`;
+      }
+    }
   });
 
   messengerFrom.addEventListener('submit', e => {
@@ -46,7 +61,12 @@ function initMessenger(newUserName){
     const messageData = {type: 'chatMessage', data: messageValue};
     socket.send(JSON.stringify(messageData));
     messengerInput.value = '';
-  })
+  });
+
+  messengerInput.addEventListener('input', e => {
+    const messageData = {type: 'userTyping', data: newUserName};
+    socket.send(JSON.stringify(messageData));
+  });
 
   function appendNewUser(user){
     const userDiv = document.createElement('div');
@@ -62,9 +82,9 @@ function initMessenger(newUserName){
     const messageDiv = document.createElement('div');
     messageDiv.innerText = message.data;
     messageDiv.setAttribute('data-id', message.id);
-    // messageDiv.addEventListener('click', e => {
-    //   socket.send(JSON.stringify({ type: 'messageLike', id: message.id }));
-    // });
+    messageDiv.addEventListener('click', e => {
+      socket.send(JSON.stringify({ type: 'messageLike', id: message.id }));
+    });
     messageDiv.appendChild(messageLikes);
     messagesContainer.appendChild(messageDiv);
   }
